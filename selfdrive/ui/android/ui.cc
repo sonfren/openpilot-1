@@ -21,10 +21,7 @@ static void set_do_exit(int sig) {
   do_exit = 1;
 }
 
-static void ui_set_brightness(UIState *s, int brightness) {
-	
-  brightness = 80;
-  
+static void ui_set_brightness(UIState *s, int brightness) { 
   static int last_brightness = -1;
   if (last_brightness != brightness && (s->awake || brightness == 0)) {
     if (set_brightness(brightness)) {
