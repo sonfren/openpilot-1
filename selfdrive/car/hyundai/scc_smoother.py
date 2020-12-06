@@ -252,10 +252,10 @@ class SccSmoother:
         override_acc = acc
         accel = (op_accel + acc) / 2.
       else:     # 선행차 있을 때 가속로직.
-        accel = op_accel * interp(clu11_speed, [50., 100.], [1.4, 1.0])
+        accel = op_accel * interp(clu11_speed, [25., 45., 60., 100.], [2.2, 1.7, 1.4, 1.0])
 
     if accel > 0.:    # 전체 가속로직. carcontroller 설정된 gain값을 곱하여 가속.
-      accel *= self.accel_gain * interp(clu11_speed, [30., 100.], [1.5, 1.2])
+      accel *= self.accel_gain * interp(clu11_speed, [35., 60., 100.], [1.5, 1.25, 1.2])
     else:
       accel *= self.decel_gain * 1.8
 
