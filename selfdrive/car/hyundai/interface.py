@@ -296,6 +296,7 @@ class CarInterface(CarInterfaceBase):
         if b.type == ButtonType.decelCruise and not b.pressed:
           events.add(EventName.buttonEnable)
 
+   # scc smoother
     if self.CC.scc_smoother is not None:
       self.CC.scc_smoother.inject_events(events)
 
@@ -304,10 +305,11 @@ class CarInterface(CarInterfaceBase):
     self.CS.out = ret.as_reader()
     return self.CS.out
 
-  def apply(self, c, sm):
+  # scc smoother - hyundai only
+  def apply(self, c, controls):
     can_sends = self.CC.update(c.enabled, self.CS, self.frame, c, c.actuators,
                                c.cruiseControl.cancel, c.hudControl.visualAlert, c.hudControl.leftLaneVisible,
                                c.hudControl.rightLaneVisible, c.hudControl.leftLaneDepart, c.hudControl.rightLaneDepart,
-                               c.hudControl.setSpeed, c.hudControl.leadVisible, sm)
+                               c.hudControl.setSpeed, c.hudControl.leadVisible, controls)
     self.frame += 1
     return can_sends
